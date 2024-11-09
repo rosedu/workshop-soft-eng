@@ -38,11 +38,11 @@ To run all tests in watch mode:
 
 You can run the application seeing how the `updateQuality()` function works:
 
-```npx ts-node test/golden-master-text-test.ts```
+```npm run app```
 
 Or with the number of days as args:
 
-```npx ts-node test/golde-master-text-test.ts 10```
+```npm run app 10```
 
 # Gilded Rose Requirements Specification
 
