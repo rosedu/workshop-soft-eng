@@ -14,15 +14,6 @@ We recommend using [Intellij](https://www.jetbrains.com/idea/download/) as the I
 You will have to install [Node](https://nodejs.org/en/download/package-manager) v18.20. This should also install `npm`,
 which is a Node packet manager
 
-You might also have to install [ts-node](https://www.npmjs.com/package/ts-node#installation), after you get Node.
-
-```
-# Locally in your project.
-npm install -D typescript
-
-npm install -D ts-node
-```
-
 # Getting started 
 
 **First, fork this repository and clone it on your device.**
@@ -47,11 +38,11 @@ To run all tests in watch mode:
 
 You can run the application seeing how the `updateQuality()` function works:
 
-```npx ts-node test/golden-master-text-test.ts```
+```npm run app```
 
 Or with the number of days as args:
 
-```npx ts-node test/golde-master-text-test.ts 10```
+```npm run app 10```
 
 # Gilded Rose Requirements Specification
 
