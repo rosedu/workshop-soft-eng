@@ -1,5 +1,21 @@
 name: Run Tests
 
 on:
+  push:
+    branches:
+      - main
+  
+  pull_request:
+    branches:
+      - main
 
 jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: app/gilded-rose.ts
+
+      - name: Run the tests
+        run: npm run test:jest
