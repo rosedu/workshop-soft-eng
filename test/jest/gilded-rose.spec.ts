@@ -89,7 +89,7 @@ describe('Gilded Rose', () => {
       // Assert
       expect(items[0].quality).toBe(80);
       expect(items[0].sellIn).toBe(1);
-  });
+    });
 
     it('"backstage passes" quality behaves properly', () => {
         // Arrange
@@ -99,24 +99,24 @@ describe('Gilded Rose', () => {
         let items = gildedRose.updateQuality();
 
         // Assert (increase by 1)
-        expect(items[0].quality).toBe(21);
+        expect(items[0].quality).toBe(20 + 1);
 
-        // Act (more days pass; sellin == 10)
-        for (let i = 15; i > 10; i--)
+        // Act (sellIn <= 10)
+        for (let i = 14; i >= 10; i--)
             items = gildedRose.updateQuality();
 
         // Assert (increase by 2)
-        expect(items[0].quality).toBe(20 + 5 * 1 + 2);
+        expect(items[0].quality).toBe(20 + 5 * 1 + 2 * 1);
 
-        // Act (more days pass; sellin == 5)
-        for (let i = 10; i > 5; i--)
+        // Act (sellIn <= 5)
+        for (let i = 9; i >= 5; i--)
           items = gildedRose.updateQuality();
 
         // Assert (increase by 3)
         expect(items[0].quality).toBe(20 + 5 * 1 + 5 * 2 + 3 * 1);
 
         // Act (end is reached)
-        for (let i = 5; i > 0; i--)
+        for (let i = 4; i >= 0; i--)
           items = gildedRose.updateQuality();
 
         // Assert
