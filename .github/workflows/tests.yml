@@ -17,5 +17,15 @@ jobs:
       - name: Checkout code
         uses: app/gilded-rose.ts
 
+      - name: Set up environment
+        uses: actions/setup-node@v2
+        with:
+          node-version: '18'
+
+      - name: Install dependencies
+        run: |
+          apt install npm
+          npm install
+
       - name: Run the tests
         run: npm run test:jest
