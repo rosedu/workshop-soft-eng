@@ -91,15 +91,36 @@ describe('Gilded Rose', () => {
       expect(items[0].sellIn).toBe(1);
   });
 
-    it('backstage passes quality increases by 1', () => {
+    it('"backstage passes" quality behaves properly', () => {
         // Arrange
         const gildedRose = new GildedRose([new Item('Backstage passes to a TAFKAL80ETC concert', 15, 20)]);
 
-        // Act
-        const items = gildedRose.updateQuality();
+        // Act (one day passes)
+        let items = gildedRose.updateQuality();
+
+        // Assert (increase by 1)
+        expect(items[0].quality).toBe(21);
+
+        // Act (more days pass; sellin == 10)
+        for (let i = 15; i > 10; i--)
+            items = gildedRose.updateQuality();
+
+        // Assert (increase by 2)
+        expect(items[0].quality).toBe(20 + 5 * 1 + 2);
+
+        // Act (more days pass; sellin == 5)
+        for (let i = 10; i > 5; i--)
+          items = gildedRose.updateQuality();
+
+        // Assert (increase by 3)
+        expect(items[0].quality).toBe(20 + 5 * 1 + 5 * 2 + 3 * 1);
+
+        // Act (end is reached)
+        for (let i = 5; i > 0; i--)
+          items = gildedRose.updateQuality();
 
         // Assert
-        expect(items[0].quality).toBe(21);
+        expect(items[0].quality).toBe(0);
     });
 
     it('conjured items degrade twice as fast in quality', () => {
