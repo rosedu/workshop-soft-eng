@@ -5,16 +5,29 @@ and CI/CD.
 
 # Gilded Rose Refactoring Kata
 
-Today's workshop is based on a popular refactoring exercise you can find out more about [here](https://github.com/emilybache/GildedRose-Refactoring-Kata/tree/main).  
+Today's workshop is based on a popular refactoring exercise you can find out more about [here](https://github.com/emilybache/GildedRose-Refactoring-Kata/tree/main).
 
 # Setup
 
 We recommend using [Intellij](https://www.jetbrains.com/idea/download/) as the IDE.
 
-You will have to install [Node](https://nodejs.org/en/download/package-manager) v18.20. This should also install `npm`,
-which is a Node packet manager
+You might also have to install [nvm-windows](https://github.com/coreybutler/nvm-windows) if you are running on Windows.
 
-# Getting started 
+You will have to install [Node](https://nodejs.org/en/download/package-manager) v18.20. This should also install `npm`,
+which is a Node packet manager.
+
+You don't need to run this in a virtual machine.
+
+You might also have to install [ts-node](https://www.npmjs.com/package/ts-node#installation), after you get Node.
+
+```
+# Locally in your project.
+npm install -D typescript
+
+npm install -D ts-node
+```
+
+# Getting started
 
 **First, fork this repository and clone it on your device.**
 
@@ -38,11 +51,11 @@ To run all tests in watch mode:
 
 You can run the application seeing how the `updateQuality()` function works:
 
-```npm run app```
+```npx ts-node test/golden-master-text-test.ts```
 
 Or with the number of days as args:
 
-```npm run app 10```
+```npx ts-node test/golde-master-text-test.ts 10```
 
 # Gilded Rose Requirements Specification
 
@@ -81,23 +94,3 @@ for you).
 
 Just for clarification, an item can never have its `Quality` increase above `50`, however __"Sulfuras"__ is a
 legendary item and as such its `Quality` is `80` and it never alters.
-
-# Continuous Integration
-
-Now that we've improved the codebase through a thorough refactor, and we've added some much-needed tests, it's time 
-to think about taking advantage of those.
-
-We'd like to only be able to merge code if the test suite passes, otherwise the PR should fail. This way we're never adding
-breaking changes. To do that, we're going to create a GitHub action to run the tests on Pull Request.
-
-Start by looking in the [test.yml](.github/workflows/tests.yml) file.
-
-1. Set the trigger to be when someone opens a PR against the `main` branch
-2. Create a `test` job that runs on ubuntu
-3. Firstly, we'd need to get the code - Hint: what are we doing when changing out a branch
-4. Secondly, we'd need to make sure the environment is set - Hint: we're using Node
-5. After we make sure we have the code and the environment set, we should install all dependencies and then run the tests.
-
-
-Stretch goal: Sometimes we're too lazy to check the status each time. It might be easier to receive an email. What should 
-we do to make sure we're receiving an email whenever a build passes or fails?
