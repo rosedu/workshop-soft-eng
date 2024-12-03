@@ -23,10 +23,10 @@ if (process.argv.length > 2) {
 }
 
 for (let i = 0; i < days + 1; i++) {
-    console.log("-------- day " + i + " --------");
-    console.log("name, sellIn, quality");
+    console.log("-------- day ".padStart(25) + i + " --------");
+    console.log("name".padStart(24).padEnd(45) + "| sellIn |" + "quality");
     items.forEach(element => {
-        console.log(element.name + ', ' + element.sellIn + ', ' + element.quality);
+      console.log(element.name.padEnd(45) + '|' + element.sellIn.toString().padStart(5).padEnd(8) + '|' + element.quality.toString().padStart(4));
 
     });
     console.log();
