@@ -1,5 +1,17 @@
 name: Run Tests
 
 on:
+  push:
+    branches: ["main"]
+  pull_requests:
+    branches: ["main"]
 
 jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: app/gilded-rose.ts
+
+    - name: npm run test:jest
+    run: npm run test:jest
