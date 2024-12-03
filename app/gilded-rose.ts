@@ -11,7 +11,13 @@ export class Item {
 }
 
 export class GildedRose {
+
     items: Array<Item>;
+    commonNames = new Set<string>([
+      'Aged Brie',
+      'Backstage passes to a TAFKAL80ETC concert',
+      'Sulfuras, Hand of Ragnaros'
+    ]);
 
     constructor(items = [] as Array<Item>) {
         this.items = items;
@@ -66,4 +72,5 @@ export class GildedRose {
 
         return this.items;
     }
+
 }
