@@ -23,9 +23,9 @@ describe('Gilded Rose', () => {
       expect(items[0].quality).toBe(1);
     })
 
-    it('quality goes 0 on name Backstage passes to a TAFKAL80ETC concert and saleIn < 0', () => {
+    it('quality goes 0 on name \'Backstage passes to a TAFKAL80ETC concert\' and sellIn <= 0', () => {
       // Arrange
-      const gildedRose = new GildedRose([new Item('Backstage passes to a TAFKAL80ETC concert', -1, 2)]);
+      const gildedRose = new GildedRose([new Item('Backstage passes to a TAFKAL80ETC concert', 0, -4)]);
 
       // Act
       const items = gildedRose.updateQuality();
@@ -34,21 +34,9 @@ describe('Gilded Rose', () => {
       expect(items[0].quality).toBe(0);
     })
 
-    it('sellIn decrease if name != Sulfuras, Hand of Ragnaros', () => {
+    it('name == \'Aged Brie\'', () => {
       // Arrange
-      const gildedRose = new GildedRose([new Item('Aged Brie', 1, 2), new Item('Sulfuras, Hand of Ragnaros', 1, 2)]);
-
-      // Act
-      const items = gildedRose.updateQuality();
-
-      // Assert
-      expect(items[0].sellIn).toBe(0);
-      expect(items[1].sellIn).toBe(1);
-    })
-
-    it('quality > 50', () => {
-      // Arrange
-      const gildedRose = new GildedRose([new Item('Backstage passes to a TAFKAL80ETC concert', 5, 48), new Item('Backstage passes to a TAFKAL80ETC concert', 7, 48)]);
+      const gildedRose = new GildedRose([new Item('Aged Brie', 1, 49), new Item('Aged Brie', 0, 49)]);
 
       // Act
       const items = gildedRose.updateQuality();
@@ -56,6 +44,30 @@ describe('Gilded Rose', () => {
       // Assert
       expect(items[0].quality).toBe(50);
       expect(items[1].quality).toBe(50);
+    })
+
+    it('name == \'Backstage passes to a TAFKAL80ETC concert\'', () => {
+      // Arrange
+      const gildedRose = new GildedRose([new Item('Backstage passes to a TAFKAL80ETC concert', 5, 48), new Item('Backstage passes to a TAFKAL80ETC concert', 7, 49)]);
+
+      // Act
+      const items = gildedRose.updateQuality();
+
+      // Assert
+      expect(items[0].quality).toBe(50);
+      expect(items[1].quality).toBe(50);
+    })
+
+    it('name == \'Sulfuras, Hand of Ragnaros\'', () => {
+      // Arrange
+      const gildedRose = new GildedRose([new Item('Sulfuras, Hand of Ragnaros', 5, 48)]);
+
+      // Act
+      const items = gildedRose.updateQuality();
+
+      // Assert
+      expect(items[0].sellIn).toBe(5);
+      expect(items[0].quality).toBe(48);
     })
 
     it('foo name', () => {
