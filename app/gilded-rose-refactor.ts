@@ -23,14 +23,13 @@ export class GildedRose {
             if (this.items[i].name == 'Aged Brie')
             {                
                 this.items[i].sellIn -= 1
-                
-                if (this.items[i].sellIn < 0)
-                    this.items[i].quality += 2
-                else
-                    this.items[i].quality += 1
 
-                if (this.items[i].quality > 50)
-                    this.items[i].quality = 50
+                if (this.items[i].quality < 50)
+                    this.items[i].quality += 1
+                
+                if (this.items[i].sellIn < 0 &&
+                    this.items[i].quality < 50)
+                    this.items[i].quality += 1
             }
 
             if (this.items[i].name == 'Backstage passes to a TAFKAL80ETC concert')
@@ -42,13 +41,15 @@ export class GildedRose {
                 else
                     if (this.items[i].quality < 50)
                     {
-                        if (this.items[i].sellIn < 6)
-                            this.items[i].quality += 3
-                        else if (this.items[i].sellIn < 11)
-                            this.items[i].quality += 2
-        
-                        if (this.items[i].quality > 50)
-                            this.items[i].quality = 50
+                        this.items[i].quality += 1
+
+                        if (this.items[i].sellIn < 11 &&
+                            this.items[i].quality < 50)
+                            this.items[i].quality += 1
+                        
+                        if (this.items[i].sellIn < 6 &&
+                            this.items[i].quality < 50)
+                            this.items[i].quality += 1
                     }
             }
 
