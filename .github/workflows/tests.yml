@@ -1,5 +1,29 @@
 name: Run Tests
 
 on:
+    pull_request:
+        branches:
+        - main
 
 jobs:
+    test:
+        runs-on: ubuntu
+
+        steps:
+
+        - name: Checkout code
+          uses: actions/checkout@v2
+
+        - name: Set up Node.js
+          uses: actions/setup-node@v2
+          with:
+                node-version: '18'
+
+        - name: Install dependencies
+          run: |
+            apt install npm
+            npm install
+
+        - name: Run tests
+          run: |
+            npm run test:jest:watch
