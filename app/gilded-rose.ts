@@ -1,3 +1,8 @@
+/**
+ *  SellIn value denotes the number of days we have to sell the items
+ *  Quality value denotes how valuable the item is
+ *  At the end of each day our system lowers both values for every item
+ */
 export class Item {
     name: string;
     sellIn: number;
@@ -40,6 +45,8 @@ export class GildedRose {
                             }
                         }
                     }
+                } else if (this.items[i].quality > 50 && this.items[i].name == 'Aged Brie') {
+                  this.items[i].quality = this.items[i].quality + 1
                 }
             }
             if (this.items[i].name != 'Sulfuras, Hand of Ragnaros') {
