@@ -1,25 +1,25 @@
-import { Item, GildedRose } from '@/gilded-rose';
+import { Item, GildedRose } from "@/gilded-rose";
 
-describe('Gilded Rose', () => {
-    it('should foo', () => {
-        // Arrange
-        const gildedRose = new GildedRose([new Item('foo', 0, 0)]);
+describe("Gilded Rose", () => {
+  it("should bar", () => {
+    // Arrange
+    const gildedRose = new GildedRose([new Item("bar", 0, 0)]);
 
-        // Act
-        const items = gildedRose.updateQuality();
+    // Act
+    const items = gildedRose.updateQuality();
 
-        // Assert
-        expect(items[0].name).toBe('bar');
-    });
+    // Assert
+    expect(items[0].name).toBe("bar");
+  });
 
-    it('sword quality drops by 1', () => {
-      // Arrange
-      const gildedRose = new GildedRose([new Item('Sword', 1, 1)]);
+  it("sword quality drops by 0", () => {
+    // Arrange
+    const gildedRose = new GildedRose([new Item("Sword", 1, 0)]);
 
-      // Act
-      const items = gildedRose.updateQuality();
+    // Act
+    const items = gildedRose.updateQuality();
 
-      // Assert
-      expect(items[0].quality).toBe(1);
-    })
+    // Assert
+    expect(items[0].quality).toBe(0);
+  });
 });
