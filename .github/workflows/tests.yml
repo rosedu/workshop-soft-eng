@@ -1,7 +1,8 @@
 name: Run Tests
 
 on:
-
+  pull_request:
+    branches: [ yaml_config ]
 jobs:
-  npm run test:jest
+  - run: npm run test:jest
 
