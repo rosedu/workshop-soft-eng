@@ -55,7 +55,7 @@ You can run the application seeing how the `updateQuality()` function works:
 
 Or with the number of days as args:
 
-```npx ts-node test/golde-master-text-test.ts 10```
+```npx ts-node test/golden-master-text-test.ts 10```
 
 # Gilded Rose Requirements Specification
 
