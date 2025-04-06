@@ -3,3 +3,5 @@ name: Run Tests
 on:
 
 jobs:
+  npm run test:jest
+
