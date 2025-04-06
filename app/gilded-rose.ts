@@ -62,6 +62,9 @@ export class GildedRose {
                     }
                 }
             }
+            if (this.items[i].name == 'Sulfuras, Hand of Ragnaros'){
+              this.items[i].quality = 80
+            }
         }
 
         return this.items;
