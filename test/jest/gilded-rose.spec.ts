@@ -3,7 +3,7 @@ import { Item, GildedRose } from '@/gilded-rose';
 describe('Gilded Rose', () => {
     it('should foo', () => {
         // Arrange
-        const gildedRose = new GildedRose([new Item('foo', 0, 0)]);
+        const gildedRose = new GildedRose([new Item('bar', 0, 0)]);
 
         // Act
         const items = gildedRose.updateQuality();
@@ -14,7 +14,7 @@ describe('Gilded Rose', () => {
 
     it('sword quality drops by 1', () => {
       // Arrange
-      const gildedRose = new GildedRose([new Item('Sword', 1, 1)]);
+      const gildedRose = new GildedRose([new Item('Sword', 1, 2)]);
 
       // Act
       const items = gildedRose.updateQuality();
@@ -22,4 +22,16 @@ describe('Gilded Rose', () => {
       // Assert
       expect(items[0].quality).toBe(1);
     })
+
+  it('should foo', () => {
+    // Arrange
+    const gildedRose = new GildedRose([new Item('Sulfuras, Hand of Ragnaros', 0, 0)]);
+
+    // Act
+    const items = gildedRose.updateQuality();
+
+    // Assert
+    expect(items[0].quality).toBe(80);
+  });
+
 });
