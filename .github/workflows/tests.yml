@@ -1,5 +1,25 @@
 name: Run Tests
 
-on:
+on: [push, pull_request]
 
 jobs:
+  test:
+    runs-on: windows-latest
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v3
+
+      - name: Use Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: "18"
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Compile TypeScript
+        run: npx tsc --noEmit
+
+      - name: Run tests
+        run: npm run test:jest
