@@ -4,10 +4,13 @@ on:
   pull_request:
     branches: [ yaml_config ]
 jobs:
-  - steps:
-    - run: npm run test:jest
+  test:
+    runs-on: ubuntu-latest
 
-workflows:
-  test_workflow:
-    jobs:
-      - test
+    steps:
+      - uses: actions/checkout@v3
+      - name: Install dependencies
+        run: npm install
+
+      - name: Run Jest Tests
+        run: npm run test:jest
