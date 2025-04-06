@@ -21,7 +21,7 @@ export class GildedRose {
         for (const item of this.items) {
 
             if(item.quality < 0){
-                // Quality never negative
+                // Quality is never <= 0
                 item.quality = 0;
             }
             else if(item.quality > 50 && item.name != "Sulfuras, Hand of Ragnaros"){
