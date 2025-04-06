@@ -2,7 +2,7 @@ name: Run Tests
 
 on:
   pull_request:
-    branches: [ yaml_config ]
+
 jobs:
   test:
     runs-on: ubuntu-latest
