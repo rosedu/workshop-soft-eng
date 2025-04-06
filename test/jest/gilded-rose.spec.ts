@@ -65,7 +65,7 @@ describe("Gilded Rose", () => {
   });
 
   it("Aged Brie quality increases", () => {
-    const items = [new Item("Aged Brie", 5, 3)];
+    const items = [new Item("Aged Brie", 4, 3)];
 
     const gildedRose = new GildedRose(items);
 
@@ -74,7 +74,7 @@ describe("Gilded Rose", () => {
       gildedRose.updateQuality();
     }
 
-    expect(items[0].quality).toBe(8);
+    expect(items[0].quality).toBe(9);
   });
 
   it("Backstage passes quality increases", () => {

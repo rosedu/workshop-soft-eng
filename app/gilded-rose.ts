@@ -1,69 +1,69 @@
 export class Item {
-    name: string;
-    sellIn: number;
-    quality: number;
+  name: string;
+  sellIn: number;
+  quality: number;
 
-    constructor(name, sellIn, quality) {
-        this.name = name;
-        this.sellIn = sellIn;
-        this.quality = quality;
-    }
+  constructor(name, sellIn, quality) {
+    this.name = name;
+    this.sellIn = sellIn;
+    this.quality = quality;
+  }
 }
 
 export class GildedRose {
-    items: Array<Item>;
+  items: Array<Item>;
 
-    constructor(items = [] as Array<Item>) {
-        this.items = items;
+  constructor(items = [] as Array<Item>) {
+    this.items = items;
+  }
+
+  updateQuality(): Array<Item> {
+    this.items.map((item) => this.updateItemQuality(item));
+
+    return this.items;
+  }
+
+  updateItemQuality(item: Item): Item {
+    if (item.name.indexOf("Sulfuras") != -1) {
+      return item;
     }
 
-    updateQuality() {
-        for (let i = 0; i < this.items.length; i++) {
-            if (this.items[i].name != 'Aged Brie' && this.items[i].name != 'Backstage passes to a TAFKAL80ETC concert') {
-                if (this.items[i].quality > 0) {
-                    if (this.items[i].name != 'Sulfuras, Hand of Ragnaros') {
-                        this.items[i].quality = this.items[i].quality - 1
-                    }
-                }
-            } else {
-                if (this.items[i].quality < 50) {
-                    this.items[i].quality = this.items[i].quality + 1
-                    if (this.items[i].name == 'Backstage passes to a TAFKAL80ETC concert') {
-                        if (this.items[i].sellIn < 11) {
-                            if (this.items[i].quality < 50) {
-                                this.items[i].quality = this.items[i].quality + 1
-                            }
-                        }
-                        if (this.items[i].sellIn < 6) {
-                            if (this.items[i].quality < 50) {
-                                this.items[i].quality = this.items[i].quality + 1
-                            }
-                        }
-                    }
-                }
-            }
-            if (this.items[i].name != 'Sulfuras, Hand of Ragnaros') {
-                this.items[i].sellIn = this.items[i].sellIn - 1;
-            }
-            if (this.items[i].sellIn < 0) {
-                if (this.items[i].name != 'Aged Brie') {
-                    if (this.items[i].name != 'Backstage passes to a TAFKAL80ETC concert') {
-                        if (this.items[i].quality > 0) {
-                            if (this.items[i].name != 'Sulfuras, Hand of Ragnaros') {
-                                this.items[i].quality = this.items[i].quality - 1
-                            }
-                        }
-                    } else {
-                        this.items[i].quality = this.items[i].quality - this.items[i].quality
-                    }
-                } else {
-                    if (this.items[i].quality < 50) {
-                        this.items[i].quality = this.items[i].quality + 1
-                    }
-                }
-            }
-        }
+    let sellIn = item.sellIn;
+    let quality = item.quality;
 
-        return this.items;
+    const sellInMultiplier = sellIn <= 0 ? 2 : 1;
+
+    const Modifiers = {
+      normal: (quality > 0 ? -1 : 0) * sellInMultiplier,
+      conjured: (quality > 0 ? -2 : 0) * sellInMultiplier,
+      brie: quality < 50 ? (quality < 49 && sellIn <= 0 ? 2 : 1) : 0,
+      backstage_pass:
+        sellIn == 0
+          ? -quality
+          : quality < 50
+            ? sellIn < 11
+              ? sellIn < 6
+                ? 3
+                : 2
+              : 1
+            : 0,
+    };
+
+    let modifier: number;
+
+    if (item.name.indexOf("Conjured") != -1) {
+      modifier = Modifiers.conjured;
+    } else if (item.name.indexOf("Brie") != -1) {
+      modifier = Modifiers.brie;
+    } else if (item.name.indexOf("Backstage") != -1) {
+      modifier = Modifiers.backstage_pass;
+    } else {
+      modifier = Modifiers.normal;
     }
+
+    item.sellIn = sellIn - 1;
+    item.quality = quality + modifier;
+
+    return item;
+  }
 }
