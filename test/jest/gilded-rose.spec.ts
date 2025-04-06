@@ -47,7 +47,7 @@ describe('Gilded Rose', () => {
 
     it('Item quality is always less than 50', () => {
       // Arrange
-      const gildedRose = new GildedRose([new Item('Sword', 2, 55), new Item('Sulfuras item', 2, 80)]);
+      const gildedRose = new GildedRose([new Item('Sword', 2, 55), new Item('Sulfuras, Hand of Ragnaros', 2, 80)]);
 
       // Act
       const items = gildedRose.updateQuality();
@@ -84,9 +84,9 @@ describe('Gilded Rose', () => {
 
     it('Backstage passes quality changes differently', () => {
       // Arrange
-      const gildedRose = new GildedRose([new Item('Backstage passes item', 8, 80),
-                                         new Item('Backstage passes item', 2, 80),
-                                         new Item('Backstage passes item', 0, 80),
+      const gildedRose = new GildedRose([new Item('Backstage passes to a TAFKAL80ETC concert', 8, 80),
+                                         new Item('Backstage passes to a TAFKAL80ETC concert', 2, 80),
+                                         new Item('Backstage passes to a TAFKAL80ETC concert', 0, 80),
       ]);
 
       // Act
@@ -101,7 +101,7 @@ describe('Gilded Rose', () => {
 
     it('Conjured items degrade 2x in quality', () => {
       // Arrange
-      const gildedRose = new GildedRose([new Item('Conjured Item', 8, 80)]);
+      const gildedRose = new GildedRose([new Item('Conjured Mana Cake', 8, 80)]);
 
       // Act
       const items = gildedRose.updateQuality();

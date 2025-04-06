@@ -19,6 +19,16 @@ export class GildedRose {
 
     updateQuality() {
         for (const item of this.items) {
+
+            if(item.quality < 0){
+                // Quality never negative
+                item.quality = 0;
+            }
+            else if(item.quality > 50 && item.name != "Sulfuras, Hand of Ragnaros"){
+                // Quality always <= 50
+                item.quality = 50;
+            }
+
             if (item.name != 'Aged Brie' && item.name != 'Backstage passes to a TAFKAL80ETC concert') {
                 if (item.quality > 0) {
                     if (item.name != 'Sulfuras, Hand of Ragnaros') {
