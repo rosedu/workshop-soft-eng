@@ -120,5 +120,16 @@ describe('Gilded Rose', () => {
 
       // Assert
       expect(items[0].quality).toBe(80);
+    });
+
+    it('date doesnt change', () => {
+        // Arrange
+        const gildedRose = new GildedRose([new Item('Sulfuras, Hand of Ragnaros', 4, 80)]);
+
+        // Act
+        const items = gildedRose.updateQuality();
+
+        // Assert
+        expect(items[0].sellIn).toBe(4);
     })
 });
