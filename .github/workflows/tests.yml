@@ -4,5 +4,10 @@ on:
   pull_request:
     branches: [ yaml_config ]
 jobs:
-  - run: npm run test:jest
+  - steps:
+    - run: npm run test:jest
 
+workflows:
+  test_workflow:
+    jobs:
+      - test
