@@ -25,23 +25,13 @@ describe('Gilded Rose', () => {
 
     it('Quality degrading 2x after sell date passed', () => {
       // Arrange
-      const gildedRose = new GildedRose([new Item('Sword', 2, 10)]);
+      const gildedRose = new GildedRose([new Item('Sword', -3, 10)]);
 
       // Act
       const items = gildedRose.updateQuality();
 
-      let days: number = 4;
-      if (process.argv.length > 2) {
-          days = +process.argv[2];
-      }
-
-      for (let i = 0; i < days + 1; i++) {
-          gildedRose.updateQuality();
-      }
-
-
       // Assert
-      expect(items[0].quality).toBe(4);
+      expect(items[0].quality).toBe(8);
     })
 
     it('Item quality is never negative', () => {
