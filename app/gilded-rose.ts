@@ -1,69 +1,97 @@
-export class Item {
-    name: string;
-    sellIn: number;
-    quality: number;
+enum ItemType {
+  NORMAL,
+  AGED_BRIE,
+  BACKSTAGE_PASS,
+  SULFURAS
+}
 
-    constructor(name, sellIn, quality) {
-        this.name = name;
-        this.sellIn = sellIn;
-        this.quality = quality;
-    }
+export class Item {
+  constructor(
+    public name: string,
+    public sellIn: number,
+    public quality: number
+  ) {}
 }
 
 export class GildedRose {
-    items: Array<Item>;
+  constructor(public items: Item[] = []) {}
 
-    constructor(items = [] as Array<Item>) {
-        this.items = items;
+  updateQuality(): Item[] {
+    return this.items.map(item => this.updateItemQuality(item));
+  }
+
+  private updateItemQuality(item: Item): Item {
+    switch (this.getItemType(item)) {
+      case ItemType.AGED_BRIE:
+        return this.updateAgedBrie(item);
+      case ItemType.BACKSTAGE_PASS:
+        return this.updateBackstagePasses(item);
+      case ItemType.SULFURAS:
+        return item;
+      default:
+        return this.updateNormalItem(item);
+    }
+  }
+
+  private getItemType(item: Item): ItemType {
+    if (item.name === 'Sulfuras, Hand of Ragnaros') return ItemType.SULFURAS;
+    if (item.name === 'Aged Brie') return ItemType.AGED_BRIE;
+    if (item.name === 'Backstage passes to a TAFKAL80ETC concert') return ItemType.BACKSTAGE_PASS;
+    return ItemType.NORMAL;
+  }
+
+  private updateNormalItem(item: Item): Item {
+    item.sellIn--;
+
+    if (item.quality > 0) {
+      item.quality--;
     }
 
-    updateQuality() {
-        for (let i = 0; i < this.items.length; i++) {
-            if (this.items[i].name != 'Aged Brie' && this.items[i].name != 'Backstage passes to a TAFKAL80ETC concert') {
-                if (this.items[i].quality > 0) {
-                    if (this.items[i].name != 'Sulfuras, Hand of Ragnaros') {
-                        this.items[i].quality = this.items[i].quality - 1
-                    }
-                }
-            } else {
-                if (this.items[i].quality < 50) {
-                    this.items[i].quality = this.items[i].quality + 1
-                    if (this.items[i].name == 'Backstage passes to a TAFKAL80ETC concert') {
-                        if (this.items[i].sellIn < 11) {
-                            if (this.items[i].quality < 50) {
-                                this.items[i].quality = this.items[i].quality + 1
-                            }
-                        }
-                        if (this.items[i].sellIn < 6) {
-                            if (this.items[i].quality < 50) {
-                                this.items[i].quality = this.items[i].quality + 1
-                            }
-                        }
-                    }
-                }
-            }
-            if (this.items[i].name != 'Sulfuras, Hand of Ragnaros') {
-                this.items[i].sellIn = this.items[i].sellIn - 1;
-            }
-            if (this.items[i].sellIn < 0) {
-                if (this.items[i].name != 'Aged Brie') {
-                    if (this.items[i].name != 'Backstage passes to a TAFKAL80ETC concert') {
-                        if (this.items[i].quality > 0) {
-                            if (this.items[i].name != 'Sulfuras, Hand of Ragnaros') {
-                                this.items[i].quality = this.items[i].quality - 1
-                            }
-                        }
-                    } else {
-                        this.items[i].quality = this.items[i].quality - this.items[i].quality
-                    }
-                } else {
-                    if (this.items[i].quality < 50) {
-                        this.items[i].quality = this.items[i].quality + 1
-                    }
-                }
-            }
-        }
-
-        return this.items;
+    if (item.sellIn < 0 && item.quality > 0) {
+      item.quality--;
     }
+
+    return this.ensureQualityInRange(item);
+  }
+
+  private updateAgedBrie(item: Item): Item {
+    item.sellIn--;
+
+    if (item.quality < 50) {
+      item.quality++;
+    }
+
+    if (item.sellIn < 0 && item.quality < 50) {
+      item.quality++;
+    }
+
+    return this.ensureQualityInRange(item);
+  }
+
+  private updateBackstagePasses(item: Item): Item {
+    item.sellIn--;
+
+    if (item.quality < 50) {
+      item.quality++;
+
+      if (item.sellIn < 11 && item.quality < 50) {
+        item.quality++;
+      }
+
+      if (item.sellIn < 6 && item.quality < 50) {
+        item.quality++;
+      }
+    }
+
+    if (item.sellIn < 0) {
+      item.quality = 0;
+    }
+
+    return this.ensureQualityInRange(item);
+  }
+
+  private ensureQualityInRange(item: Item): Item {
+    item.quality = Math.max(0, Math.min(50, item.quality));
+    return item;
+  }
 }
