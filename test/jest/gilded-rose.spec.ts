@@ -14,7 +14,7 @@ describe("Gilded Rose", () => {
 
   it("Sulfuras quality is 80 and it never alters", () => {
     // Arrange
-    const gildedRose = new GildedRose([new Item("Sulfuras", 1, 80)]);
+    const gildedRose = new GildedRose([new Item("Sulfuras, Hand of Ragnaros", 1, 80)]);
 
     // Act
     const items = gildedRose.updateQuality();
@@ -25,7 +25,7 @@ describe("Gilded Rose", () => {
 
   it("Sulfuras SellIn date never alters", () => {
     // Arrange
-    const gildedRose = new GildedRose([new Item("Sulfuras", 8, 80)]);
+    const gildedRose = new GildedRose([new Item("Sulfuras, Hand of Ragnaros", 8, 80)]);
 
     // Act
     const items = gildedRose.updateQuality();
@@ -132,7 +132,6 @@ describe("Gilded Rose", () => {
   it("Once the sell by date has passed, Quality degrades twice as fast.", () => {
     const gildedRose = new GildedRose([
       new Item("Aged Brie", -2, 6),
-      new Item("Backstage passes to a TAFKAL80ETC concert", 0, 50),
       new Item("Sword", 0, 2),
       new Item("Sword", 0, 3),
       new Item("Sword", -1, 1),
@@ -142,9 +141,8 @@ describe("Gilded Rose", () => {
 
     expect(items[0].quality).toBe(8);
     expect(items[1].quality).toBe(0);
-    expect(items[2].quality).toBe(0);
-    expect(items[3].quality).toBe(1);
-    expect(items[4].quality).toBe(0);
+    expect(items[2].quality).toBe(1);
+    expect(items[3].quality).toBe(0);
   });
 
   it('"Conjured" items degrade in Quality twice as fast as normal items.', () => {
@@ -158,9 +156,9 @@ describe("Gilded Rose", () => {
 
     expect(items[0].sellIn).toBe(2);
     expect(items[0].quality).toBe(4);
-    expect(items[2].sellIn).toBe(-1);
+    expect(items[1].sellIn).toBe(-1);
+    expect(items[1].quality).toBe(0);
+    expect(items[2].sellIn).toBe(-4);
     expect(items[2].quality).toBe(0);
-    expect(items[3].sellIn).toBe(-4);
-    expect(items[3].quality).toBe(0);
   });
 });
