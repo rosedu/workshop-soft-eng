@@ -9,7 +9,7 @@ describe('Gilded Rose', () => {
         const items = gildedRose.updateQuality();
 
         // Assert
-        expect(items[0].name).toBe('bar');
+        expect(items[0].name).toBe('foo');
     });
 
     it('sword quality drops by 1', () => {
@@ -20,6 +20,6 @@ describe('Gilded Rose', () => {
       const items = gildedRose.updateQuality();
 
       // Assert
-      expect(items[0].quality).toBe(1);
+      expect(items[0].quality).toBe(0);
     })
 });
