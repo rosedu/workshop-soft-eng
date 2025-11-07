@@ -7,23 +7,20 @@ The workshop is based on a popular refactoring exercise you can find out more ab
 
 ## Setup
 
-We recommend using [Intellij](https://www.jetbrains.com/idea/download/) as the IDE.
+We recommend using [Intellij](https://www.jetbrains.com/idea/download/) as the IDE, but vscode is also great for this.
 
-You might also have to install [nvm-windows](https://github.com/coreybutler/nvm-windows) if you are running on Windows.
-
-You will have to install [Node](https://nodejs.org/en/download/package-manager) v18.20.
-This should also install `npm`, the Node packet manager.
+You might also have to install [python](https://www.python.org/downloads/windows/) if you are running on Windows.
 
 You don't need to run this in a virtual machine.
 
-You might also have to install [ts-node](https://www.npmjs.com/package/ts-node#installation), after you get Node.
+To install the dependencies, run:
 
 ```console
 # Locally in your project.
-npm install -D typescript
-
-npm install -D ts-node
+pip3 install -r requirements.txt
 ```
+
+Suggestion: create a python virtual environment for this project. See the [documentation](https://docs.python.org/3/library/venv.html)
 
 ## Getting started
 
@@ -32,37 +29,37 @@ npm install -D ts-node
 Then, install dependencies:
 
 ```console
-npm install
+pip3 install -r requirements.txt
 ```
 
-## Run the Unit Tests from the Command-Line
+## Run the unit tests from the Command-Line
 
-We are using [Jest](https://jestjs.io/) as the testing framework.
+We are using [Pytest](https://docs.pytest.org/en/stable/) as the testing framework
 
-To run tests:
-
-```console
-npm run test:jest
+```
+pytest
 ```
 
-To run all tests in watch mode:
+To run test with coverage
 
-```console
-npm run test:jest:watch
 ```
+pytest --cov=gilded_rose
+```
+
+You can also use the python test windows from vscode (you must have the [python](https://marketplace.visualstudio.com/items?itemName=ms-python.python) extension installed)
 
 ## Running the App
 
-You can run the application seeing how the `updateQuality()` function works:
+You can run the application seeing how the `update_quality()` function works:
 
 ```console
-npx ts-node test/golden-master-text-test.ts
+python3 texttest_fixture.py
 ```
 
 Or with the number of days as args:
 
 ```console
-npx ts-node test/golden-master-text-test.ts 10
+python3 texttest_fixture.py 10
 ```
 
 ## Gilded Rose Requirements Specification
